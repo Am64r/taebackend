@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import os
-import constants
+from dotenv import load_dotenv
+load_dotenv()
 import warnings
 import logging
 from langchain_community.document_loaders import TextLoader
@@ -18,7 +19,9 @@ from flask_cors import CORS
 
 warnings.filterwarnings("ignore", category=LangChainDeprecationWarning)
 
-os.environ["OPENAI_API_KEY"] = constants.APIKEY
+apikey = os.getenv('APIKEY')
+
+os.environ["OPENAI_API_KEY"] = apikey
 
 app = Flask(__name__)
 CORS(app)  # This will handle the CORS issues
