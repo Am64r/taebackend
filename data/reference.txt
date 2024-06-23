@@ -1,0 +1,64 @@
+full name: Amr Elhady
+email: ae429@cornell.edu 
+College: Cornell University, graduating in 2026
+Major: Bachelor of Engineering in Computer Science
+Relevant coursework: CS 2110: Data Structures, MATH 2930: Differential Equations, PHYS1112: Mechanics & Heat, CS 1110: Intro to Python, MATH 1920: Multivariable Calculus
+
+Skills
+Languages: Java, Python, JavaScript, Solidity, C++, HTML, CSS
+Technologies: Node.js, React.js, React Native, MySQL, MongoDB, Git, AWS, LaTeX
+
+Current Work, Experience, Jobs, Internships, Roles:
+1. Head of Engineering at Cornell Blockchain, October 2023-Present. 
+Responsibilities: 
+• Facilitating comprehensive onboarding and continuous development for club members, orchestrating three tailored technical workshops per semester, enhancing blockchain fluency from foundational concepts to advanced smart contract development
+• Identifying and coordinating participation in strategically selected hackathons, fostering hands-on experience and promoting
+the practical application of blockchain technology in competitive and collaborative environments
+
+
+2. Internship: Software Engineering Intern at Entendre Finance in Manhattan, New York Jul 2022 – Present
+Responsibilites: 
+• Working directly with the founding team, including the CEO to establish milestones and roadmap
+• Implementing initial front end core experience using React.js front end and Node.js back end, while attending customer calls to
+learn pain points from early design partners
+• Launched a feature enabling single-login client switching, generating $9,600 in annual recurring revenue
+• Reducing reporting time by 90% through the automation of blockchain transaction accounting from customer wallet data
+
+
+3. Co-Founder of Brunswick Cart. Location: South Brunswick, NJ. Duration: Apr 2019 – Dec 2020, Full-Time
+Responsibilities: 
+• Founded during Covid-19 to bring grocery solutions to 200+ high risk community families
+• Established alternative job opportunities for 15+ displaced Uber and Lyft drivers
+• Developed and managed a React.js-based web platform with 1000+ product pages
+
+
+
+Technical Projects:
+
+ AI Story Assistant | GitHub
+• Created GPTree for HackPrinceton, a full stack React.js based story generation tool that allows writers to organize their ideas
+and use AI to develop their plot, integrating Node.js back end and Express.js server with OpenAI’s GPT-3.5 API to produce
+dynamic narrative content
+
+
+Java Minecraft Mod | GitHub
+• Programmed a Minecraft Forge mod in Java with custom potion effects, contributed 15+ bug fixes, optimized code for
+performance, and used Gradle for build management and JSON for texture design
+React Native Restaurant App | GitHub
+• Produced a feature-rich full stack React Native app with seamless Yelp API integration, advanced geolocation, and polished
+UI/UX design to allow users to locate nearby restaurants and view their hours
+
+
+Arduino Water Clock | GitHub
+• Engineered an Arduino water clock with timed servo motor tipping, showcasing expertise in Arduino programming, precise
+timing control, and integration of motors and sensors for a unique alarm system
+
+
+Community Service
+
+Eagle Scout Middlesex County, NJ Scouts of America Troop 114 As of Dec 2022
+• Constructed 3 planter boxes in 2-month long Eagle Service Project for The Muslim American Society in Central New Jersey for the purpose of beautifying the landscape
+• Led troop of 60+ scouts, holding weekly meetings and organizing outings alongside other troop leaders
+Volunteer Firefighter Franklin Park, NJ Franklin Park Fire Department Sep 2022 – Jan 2024
+• Responded to 20+ fire calls; participated in community events to educate elementary students on the importance of fire safety; maintained firehouse and truck equipment.
+ 
