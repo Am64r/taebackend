@@ -40,7 +40,7 @@ def generate_text():
 
     query = data['text']
 
-    loader = TextLoader("data/reference.txt") #could pass a generic url amr,com
+    # loader = TextLoader("data/reference.txt") #could pass a generic url amr,com
     loader2 = DirectoryLoader('data/')
 
     index = VectorstoreIndexCreator().from_loaders([loader2])
