@@ -17,6 +17,8 @@ from langchain.prompts.chat import (
 from langchain_core.messages import HumanMessage, SystemMessage
 from flask_cors import CORS
 
+from langchain.embeddings.openai import OpenAIEmbeddings
+
 warnings.filterwarnings("ignore", category=LangChainDeprecationWarning)
 
 apikey = os.getenv('APIKEY')
@@ -50,7 +52,9 @@ def generate_text():
         logger.debug("Loading Docs")
         loader = DirectoryLoader('data/')
 
-        index = VectorstoreIndexCreator().from_loaders([loader])
+        embeddings = OpenAIEmbeddings()
+
+        index = VectorstoreIndexCreator(embedding=embeddings).from_loaders([loader])
 
         logger.debug("Querying Index")
 
