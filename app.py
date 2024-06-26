@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -63,6 +63,12 @@ def generate_text():
 @app.route('/')
 def index():
     return "Flask server is running"
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 
 if __name__ == '__main__':
     app.run(port=8000) #5000
