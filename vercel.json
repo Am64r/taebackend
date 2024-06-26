@@ -9,6 +9,7 @@
     "routes": [
       {
         "src": "/generate-text",
+        "methods":["POST"],
         "dest": "/app.py"
       },
       {
