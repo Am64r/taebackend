@@ -28,8 +28,7 @@ CORS(app)  # This will handle the CORS issues
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s',
-                    handlers=[logging.FileHandler("flask.log"),
-                              logging.StreamHandler()])
+                    handlers=[logging.StreamHandler()])
 
 logger = logging.getLogger(__name__)
 
