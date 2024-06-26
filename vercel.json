@@ -1,21 +1,14 @@
 {
-    "version": 2,
-    "builds": [
+  "builds": [
       {
-        "src": "app.py",
-        "use": "@vercel/python"
+          "src":"app.py",
+          "use":"@vercel/python"
       }
-    ],
-    "routes": [
+  ],
+  "routes": [
       {
-        "src": "/generate-text",
-        "methods":["POST"],
-        "dest": "/app.py"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/app.py"
+          "src":"/(.*)", 
+          "dest":"app.py"
       }
-    ]
-  }
-  
+  ]
+} 
