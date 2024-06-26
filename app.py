@@ -26,7 +26,12 @@ os.environ["OPENAI_API_KEY"] = apikey
 app = Flask(__name__)
 CORS(app)  # This will handle the CORS issues
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s',
+                    handlers=[logging.FileHandler("flask.log"),
+                              logging.StreamHandler()])
+
+logger = logging.getLogger(__name__)
 
 @app.after_request
 def add_cors_headers(response):
@@ -39,25 +44,25 @@ def add_cors_headers(response):
 def generate_text():
     try:
         data = request.json
-        logging.debug(f"Received request data: {data}")
+        logger.debug(f"Received request data: {data}")
 
         query = data['text']
         
-        logging.debug("Loading Docs")
+        logger.debug("Loading Docs")
         loader = DirectoryLoader('data/')
 
         index = VectorstoreIndexCreator().from_loaders([loader])
 
-        logging.debug("Querying Index")
+        logger.debug("Querying Index")
 
         result = index.query(query, llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo",))
 
-        logging.debug(f"Sending response: {result}")
+        logger.debug(f"Sending response: {result}")
 
         return jsonify({'generatedText': result})
     
     except Exception as e:
-        logging.error(f"Error processing request: {e}")
+        logger.error(f"Error processing request: {e}")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/')
