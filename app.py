@@ -73,7 +73,7 @@ def index():
     return "Flask server is running"
 
 @app.route('/hello-world')
-def index():
+def hw():
     return "Hello World"
 
 @app.route('/favicon.ico')
