@@ -41,7 +41,7 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
 
-@app.route('/generate-text', methods=['POST'])
+@app.route('/generate-text', methods=['GET'])
 def generate_text():
     try:
         data = request.json
