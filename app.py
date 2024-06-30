@@ -72,6 +72,10 @@ def generate_text():
 def index():
     return "Flask server is running"
 
+@app.route('/hello-world')
+def index():
+    return "Hello World"
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
