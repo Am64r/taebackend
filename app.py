@@ -81,9 +81,19 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
+@app.route('/<path:path>')
+def catch_all(path):
+    return f"You accessed path: {path}", 404
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    data = request.json
+    input_text = data.get('text', '')
+    # Your chat logic here
+    response = f"You said: {input_text}"
+    return jsonify({"response": response})
 
 if __name__ == '__main__':
-    app.run(port=8000) #5000
-
+    app.run(debug=True)
 
 #deploy on aws lambda
