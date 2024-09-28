@@ -1,101 +1,34 @@
-from flask import Flask, request, jsonify, send_from_directory
-import os
-from dotenv import load_dotenv
-load_dotenv()
-import warnings
-import logging
-from langchain_community.document_loaders import TextLoader
-from langchain_community.document_loaders import DirectoryLoader
-from langchain.indexes import VectorstoreIndexCreator
-from langchain_core._api.deprecation import LangChainDeprecationWarning
-from langchain_community.chat_models import ChatOpenAI
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    HumanMessagePromptTemplate,
-    SystemMessagePromptTemplate,
-)
-from langchain_core.messages import HumanMessage, SystemMessage
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-
-from langchain.embeddings.openai import OpenAIEmbeddings
-
-warnings.filterwarnings("ignore", category=LangChainDeprecationWarning)
-
-apikey = os.getenv('APIKEY')
-
-os.environ["OPENAI_API_KEY"] = apikey
+import logging
+import sys
 
 app = Flask(__name__)
-CORS(app)  # This will handle the CORS issues
+CORS(app)  # This enables CORS for all routes
+logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s',
-                    handlers=[logging.StreamHandler()])
-
-logger = logging.getLogger(__name__)
-
-@app.after_request
-def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    return response
-
-@app.route('/generate-text', methods=['POST'])
+@app.route('/generate-text', methods=['GET', 'POST'])
 def generate_text():
     app.logger.debug(f"Received request: {request.method} {request.path}")
-    app.logger.debug(f"Request data: {request.get_json()}")
-    try:
-        data = request.json
-        logger.debug(f"Received request data: {data}")
-
-        query = data['text']
-        
-        logger.debug("Loading Docs")
-        loader = DirectoryLoader('data/')
-
-        embeddings = OpenAIEmbeddings()
-
-        index = VectorstoreIndexCreator(embedding=embeddings).from_loaders([loader])
-
-        logger.debug("Querying Index")
-
-        result = index.query(query, llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo",))
-
-        logger.debug(f"Sending response: {result}")
-
-        return jsonify({'generatedText': result})
+    app.logger.debug(f"Request headers: {request.headers}")
     
+    if request.method == 'GET':
+        return jsonify({"message": "GET request received"}), 200
+    
+    try:
+        app.logger.debug(f"Request data: {request.get_data(as_text=True)}")
+        input_text = request.json.get('text', '')
+        generated_text = f"You said: {input_text}"
+        
+        app.logger.debug(f"Generated text: {generated_text}")
+        return jsonify({"generatedText": generated_text}), 200
     except Exception as e:
-        logger.error(f"Error processing request: {e}")
-        return jsonify({'error': str(e)}), 500
+        app.logger.error(f"Error processing request: {str(e)}", exc_info=True)
+        return jsonify({"error": "An error occurred processing your request"}), 500
 
-@app.route('/')
-def index():
-    return "Flask server is running"
-
-@app.route('/hello-world')
-def hw():
-    return "Hello World"
-
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-@app.route('/<path:path>')
-def catch_all(path):
-    return f"You accessed path: {path}", 404
-
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    data = request.json
-    input_text = data.get('text', '')
-    # Your chat logic here
-    response = f"You said: {input_text}"
-    return jsonify({"response": response})
+@app.route('/', methods=['GET'])
+def health_check():
+    return jsonify({"status": "healthy"}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-#deploy on aws lambda

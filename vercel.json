@@ -8,6 +8,11 @@
   ],
   "routes": [
     {
+      "src": "/generate-text",
+      "methods": ["POST", "GET"],
+      "dest": "app.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "app.py"
     }
